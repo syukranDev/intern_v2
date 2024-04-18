@@ -7,8 +7,11 @@ const PORT = process.env.SERVER_PORT
 
 const { runCronJob } = require('./cronjobs/cron');
 const InventoryRouter = require('./router/InventoryRouter')
+const AuthRouter = require('./router/AuthRouter')
 
+app.use(express.json()) //need to include to read POST API payload
 app.use('/api/inventory', InventoryRouter)
+app.use('/api/auth', AuthRouter)
 
 app.use (function (err, req, res, next){
     logger.error(err.stack);
