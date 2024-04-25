@@ -26,6 +26,7 @@ db.sequelize = sequelize;
 
 // public schema
 db.inventory = require('./inventory.js')(sequelize, Sequelize);
+db.file_uploads = require('./file_uploads.js')(sequelize, Sequelize);
 
 sequelize.sync();
 
