@@ -37,6 +37,7 @@ router.post('/new', async (req, res) => {
     } catch (e) {
         if (transaction) await transaction.rollback();
         console.error(e)
+        return res.status(500).send({errMsg: 'Internal Server Error'});
     }
     return res.send({ status: 'success', message: 'Successfully created new product data.'})
 })

@@ -25,8 +25,10 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // public schema
-db.inventory = require('./inventory.js')(sequelize, Sequelize);
 db.file_uploads = require('./file_uploads.js')(sequelize, Sequelize);
+db.products = require('./products.js')(sequelize, Sequelize);
+db.users = require('./users.js')(sequelize, Sequelize);
+db.webhook_3rd_party = require('./webhook_3rd_party.js')(sequelize, Sequelize);
 
 sequelize.authenticate()
   .then(() => {
