@@ -28,6 +28,13 @@ db.sequelize = sequelize;
 db.inventory = require('./inventory.js')(sequelize, Sequelize);
 db.file_uploads = require('./file_uploads.js')(sequelize, Sequelize);
 
-sequelize.sync();
+sequelize.authenticate()
+  .then(() => {
+    console.log('Database connection has been established successfully.');
+    return sequelize.sync();
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 module.exports = db;
