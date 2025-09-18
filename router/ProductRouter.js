@@ -32,8 +32,6 @@ router.post('/new', async (req, res) => {
             price,
             expiry_date,
             status: 'active',
-            created_by: 'system',
-            updated_by : 'system',
         }, transaction)
 
         await transaction.commit();
