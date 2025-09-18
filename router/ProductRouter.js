@@ -44,6 +44,35 @@ router.post('/new', async (req, res) => {
     return res.send({ status: 'success', message: 'Successfully created new product data.'})
 })
 
+//GET api/product/details/:id
+router.get('/details/:id', async (req, res) => {
+    let productId = req.params.id
+    if (!productId) return res.status(422).send({ errMsg: 'Missing inventory id in the url'})
+    let data;
+
+    try {
+        let isProductExist = await db.products.findOne({
+            where: {
+                id: productId
+            }
+        })
+
+        if (!isProductExist) return res.status(422).send({ errMsg: 'Id is not valid'})
+
+        data = await db.products.findOne({
+            where: {
+                id: productId
+            }
+        })
+    
+    } catch (e) {
+        console.error(e)
+        return res.status(500).send({ errMsg: 'Internal Server Error'})
+    }
+
+    return res.status(200).send({ status: 'success', data: data })
+})
+
 // GET all inventory api/inventory/list (PROTECTED)
 // router.get('/list/all', verifyToken, async (req, res) => {
 //     let data;
@@ -61,36 +90,6 @@ router.post('/new', async (req, res) => {
 //     return res.send({ status: 'sucess', data})
 // })
 
-//GET api/product/o/:id
-// router.get('/o/:id', verifyToken, async (req, res) => {
-//     let inventoryId = req.params.id
-//     if (!inventoryId) return res.status(422).send({ errMsg: 'Missing inventory id in the url'})
-//     let singleInventory;
-
-//     try {
-//         let isInventoryExist = await db.inventory.findOne({
-//             where: {
-//                 id: inventoryId
-//             }
-//         })
-
-//         if (!isInventoryExist) return res.status(422).send({ errMsg: 'Id is not valid'})
-
-//         singleInventory = await db.inventory.findOne({
-//             where: {
-//                 id: inventoryId
-//             }
-//         })
-    
-//     } catch (e) {
-//         console.error(e)
-//     }
-
-//     return res.send({
-//         status: 'success',
-//         data: singleInventory
-//     })
-// })
 
 // POST - api/product/update
 // router.post('/update', verifyToken,  async (req, res) => { 
