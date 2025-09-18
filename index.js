@@ -5,13 +5,13 @@ const logger =  require('./logger/logger')
 require('dotenv').config();
 const PORT = process.env.SERVER_PORT 
 
-const { runCronJob } = require('./cronjobs/cron');
-const InventoryRouter = require('./router/InventoryRouter')
-const AuthRouter = require('./router/AuthRouter')
-const FileRouter = require('./router/FileRouter')
+const { runCronJob } = require('./cronjobs/cron.js');
+const ProductRouter = require('./router/ProductRouter.js')
+const AuthRouter = require('./router/AuthRouter.js')
+const FileRouter = require('./router/FileRouter.js')
 
 app.use(express.json()) //need to include to read POST API payload
-app.use('/api/inventory', InventoryRouter)
+app.use('/api/product', ProductRouter)
 app.use('/api/auth', AuthRouter)
 app.use('/api/file', FileRouter)
 
