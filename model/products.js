@@ -4,11 +4,11 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
       allowNull: false,
-      primaryKey: true
     },
     name: {
       type: Sequelize.TEXT,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     description: {
       type: Sequelize.TEXT,
@@ -27,20 +27,12 @@ module.exports = (sequelize, Sequelize) => {
       allowNull: true
     },
     expiry_date: {
-      type: Sequelize.DATE,
+      type: Sequelize.DATEONLY,
       allowNull: true
     },
     status: {
       type: Sequelize.TEXT,
       allowNull: true
-    },
-    created_by: {
-      type: Sequelize.TEXT,
-      allowNull: false
-    },
-    updated_by: {
-      type: Sequelize.TEXT,
-      allowNull: false
     }
   }, {
     timestamps: true,

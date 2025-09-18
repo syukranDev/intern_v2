@@ -10,8 +10,12 @@ const sq = db.sequelize;
 // POST - api/product/add
 router.post('/new', async (req, res) => { 
 
-    // console.log(req.body)
+    console.log(req.body)
     let { name, description, origin_country, quantity, price, expiry_date } = req.body
+
+    if (!name || !description || !origin_country || !quantity || !price || !expiry_date) {
+        return res.status(422).send({ errMsg: 'Missing payload'})
+    }
 
 
     let transaction;
