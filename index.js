@@ -24,6 +24,12 @@ app.get('/welcome_onboard/:name', (req, res) => {
     return res.send({ message : `Welcome to onboard, ${name ?? 'Not Available'}`})
 });
 
+
+app.get('/homepage', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'homepage.html'));
+});
+
+
 // Enable below to run 
 // runCronJob();
 
