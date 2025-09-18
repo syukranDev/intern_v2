@@ -17,11 +17,11 @@ router.post('/upload', upload.single('file'), async (req, res) => {
 
     let uploadedFile = req.file
     let fileName = req.file.originalname
-    let email = req.body.email
+    // let email = req.body.email
 
     console.log(req.file)
 
-    if (!email) return res.status(400).send({ errMsg: 'No email in the form'})
+    // if (!email) return res.status(400).send({ errMsg: 'No email in the form'})
     if (!uploadedFile) return res.status(400).send({ errMsg: 'No file uploaded'})
 
     if (uploadedFile.mimetype !== 'text/plain') {
@@ -47,21 +47,21 @@ router.post('/upload', upload.single('file'), async (req, res) => {
                 await transaction.commit();
 
                 //Then, send an email to user
-                let subject = 'Test Email from API'
-                let text = `This is an email testing, the content of the file uploaded is <br> <h1>${data}</h1>`
+                // let subject = 'Test Email from API'
+                // let text = `This is an email testing, the content of the file uploaded is <br> <h1>${data}</h1>`
 
-                await sendAnEmail(email, subject, text)
+                // await sendAnEmail(email, subject, text)
 
                 return res.send({ 
                     status: 'success',
-                    message: 'File uploaded and emailed successfully',
+                    message: 'File uploaded successfully',
                     fileName: fileName,
                     fileData: data
                 })
             } catch(e) {
                 if(transaction) await transaction.rollback();
                 console.error(e)
-                return res.status(500).send({ errMsg: 'Error to upload file and send an email'})
+                return res.status(500).send({ errMsg: 'Error to upload file'})
             }
         }
     })
