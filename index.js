@@ -9,11 +9,13 @@ const { runCronJob } = require('./cronjobs/cron.js');
 const ProductRouter = require('./router/ProductRouter.js')
 const AuthRouter = require('./router/AuthRouter.js')
 const FileRouter = require('./router/FileRouter.js')
+const ExternalDataRouter = require('./router/ExternalDataRouter.js')
 
 app.use(express.json()) //need to include to read POST API payload
 app.use('/api/product', ProductRouter)
 app.use('/api/auth', AuthRouter)
 app.use('/api/file', FileRouter)
+app.use('/api/external_data', ExternalDataRouter)
 
 
 app.get('/welcome_onboard/:name', (req, res) => {

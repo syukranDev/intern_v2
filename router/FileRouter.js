@@ -44,13 +44,14 @@ router.post('/upload', upload.single('file'), async (req, res) => {
                     file_path: `uploads/${fileName}`
                 })
 
-                await transaction.commit();
-
+                
                 //Then, send an email to user
-                // let subject = 'Test Email from API'
-                // let text = `This is an email testing, the content of the file uploaded is <br> <h1>${data}</h1>`
+                let subject = 'Test Email from API'
+                let text = `This is an email testing, the content of the file uploaded is ----> ${data}`
+                let email = `m.syukransoleh@gmail.com`
 
-                // await sendAnEmail(email, subject, text)
+                await sendAnEmail(email, subject, text)
+                await transaction.commit();
 
                 return res.send({ 
                     status: 'success',
