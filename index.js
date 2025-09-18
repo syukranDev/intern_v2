@@ -21,8 +21,19 @@ app.use (function (err, req, res, next){
     else next();
 });
 
+app.get('/welcome_onboard/:name', (req, res) => {
+    // let name = req.query.name
+    let name = req.params.name
+    res.send({ message : `Welcome to onboard, ${name ?? 'Not Available'}`})
+});
+
 // Enable below to run 
 // runCronJob();
+
+app.use((req, res, next) => {
+    res.status(404).json({ error: 'API path does not exist' });
+});
+
 
 app.listen(PORT, () => {
     console.log(`Connected to my server at PORT(${PORT})`)
