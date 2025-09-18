@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express();
 const logger =  require('./logger/logger')
+const path = require('path');
 
 require('dotenv').config();
 const PORT = process.env.SERVER_PORT 
@@ -26,7 +27,7 @@ app.get('/welcome_onboard/:name', (req, res) => {
 
 
 app.get('/homepage', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'homepage.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 
