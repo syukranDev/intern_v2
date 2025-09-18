@@ -15,11 +15,6 @@ app.use('/api/product', ProductRouter)
 app.use('/api/auth', AuthRouter)
 app.use('/api/file', FileRouter)
 
-app.use (function (err, req, res, next){
-    logger.error(err.stack);
-    if (err) res.status(400).json({ message: 'Invalid JSON'});
-    else next();
-});
 
 app.get('/welcome_onboard/:name', (req, res) => {
     // let name = req.query.name
@@ -34,6 +29,11 @@ app.use((req, res, next) => {
     res.status(404).json({ error: 'API path does not exist' });
 });
 
+app.use (function (err, req, res, next){
+    logger.error(err.stack);
+    if (err) res.status(400).json({ message: 'Invalid JSON'});
+    else next();
+});
 
 app.listen(PORT, () => {
     console.log(`Connected to my server at PORT(${PORT})`)
