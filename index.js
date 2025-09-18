@@ -7,13 +7,13 @@ const PORT = process.env.SERVER_PORT
 
 const { runCronJob } = require('./cronjobs/cron.js');
 const ProductRouter = require('./router/ProductRouter.js')
-const AuthRouter = require('./router/AuthRouter.js')
+const UserRouter = require('./router/UserRouter.js')
 const FileRouter = require('./router/FileRouter.js')
 const ExternalDataRouter = require('./router/ExternalDataRouter.js')
 
 app.use(express.json()) //need to include to read POST API payload
 app.use('/api/product', ProductRouter)
-app.use('/api/auth', AuthRouter)
+app.use('/api/user', UserRouter)
 app.use('/api/file', FileRouter)
 app.use('/api/external_data', ExternalDataRouter)
 

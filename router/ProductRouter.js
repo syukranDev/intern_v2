@@ -45,6 +45,7 @@ router.post('/new', async (req, res) => {
 })
 
 //GET api/product/details/:id
+// router.get('/details/:id', verifyToken, async (req, res) => {
 router.get('/details/:id', async (req, res) => {
     let productId = req.params.id
     if (!productId) return res.status(422).send({ errMsg: 'Missing inventory id in the url'})
@@ -57,7 +58,7 @@ router.get('/details/:id', async (req, res) => {
             }
         })
 
-        if (!isProductExist) return res.status(422).send({ errMsg: 'Id is not valid'})
+        if (!isProductExist) return res.status(422).send({ errMsg: 'Product not exist!'})
 
         data = await db.products.findOne({
             where: {

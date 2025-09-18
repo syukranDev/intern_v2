@@ -4,20 +4,17 @@ require('dotenv').config()
 let secretKey = process.env.JWT_SECRET_KEY
 
 const verifyToken = (req, res, next) => {
-    const token = req.headers.authorization;
-    console.log(token)
-
-    if (!token) return res.status(401).send({
-        errMsg: 'Forbidden, no token provided.'
-    })
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'No token provided' });
 
     jwt.verify(token, secretKey, (err, decoded) => {
-        // if (err) {
-        //     console.log(err)
-        //     return res.status(401).send({ errMsg: 'Invalid or expired token.'})
-        // }
+        if (err) {
+            console.log(err)
+            return res.status(401).send({ errMsg: 'Invalid or expired token.'})
+        }
 
-        // req.token = decoded.userLoggedIn// this one optional
+        req.user = decoded// this one optional
 
         next();
     })
